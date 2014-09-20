@@ -16,8 +16,8 @@ MAIN = main.c
 ## include the additional .c source (in same directory) here 
 ## (and include the .h files in your foo.c)
 #LOCAL_SOURCE = 
-LOCAL_SOURCE = ht1632c.c
-LOCAL_SOURCE += seven_segs.c
+#LOCAL_SOURCE = ht1632c.c
+#LOCAL_SOURCE += seven_segs.c
 
 ## Here you can link to one more directory (and multiple .c files)
 # EXTRA_SOURCE_DIR = 
