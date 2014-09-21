@@ -3,6 +3,10 @@
 #include "main.h"
 //#include "fullSine.h"
 
+#define PWM_CLK_HZ 16000000UL
+
+#define PWM_OVF_FREQ (PWM_CLK_HZ/256UL)
+
 
 const int8_t fullSine[256] PROGMEM = {
   0, 3, 6, 9, 12, 15, 18, 21,
@@ -39,6 +43,8 @@ const int8_t fullSine[256] PROGMEM = {
   -25, -22, -19, -16, -13, -10, -7, -4
 };
 
+
+
 //prototypes
 static inline void init_fast_pwm_timer1(void);
 
@@ -71,7 +77,8 @@ static inline void init_fast_pwm_timer1(void){
     
     TCCR1A |= (1<<PWM1A); //enable pwm mode for OCR1A
     
-    TCCR1B |= (1<<CS11); //select PCK/2 for clock source (32MHz) 
+    //TCCR1B |= (1<<CS11); //select PCK/2 for clock source (32MHz) 
+    TCCR1B |= (1<<CS11)|(1<<CS10); //select PCK/4 (16MHz) source
     
     TIMSK |= (1<<TOIE1); //enable TOV1 interrupt (timer overflow)
     
@@ -80,7 +87,7 @@ static inline void init_fast_pwm_timer1(void){
 //attiny26 isr for timer1 overflow
 ISR(TIMER1_OVF1_vect){
 //the interrupt routine
-
-
-
+    
+    
+    
 }
