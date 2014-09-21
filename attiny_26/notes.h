@@ -1,7 +1,9 @@
 
+#ifndef NOTES_H
+#define NOTES_H
+
 #include <avr/pgmspace.h>
 /*notes and stuff*/
-
 
 #define PWM_CLK_HZ 16000000UL //THE PWM CLOCK SPEED AFTER PRESCALE
 
@@ -19,7 +21,7 @@
 const uint16_t inc16_note_vals[] PROGMEM = {
     //these first few note's freqs are from here:
     // http://www.phy.mtu.edu/~suits/notefreqs.html
-    17,     //C0 16.35Hz 
+    17,     //C0 16.35Hz MIDI 12
     18,     //C#0 17.32Hz
     19,     //D0 18.35Hz
     20,     //D#0 19.45Hz
@@ -149,3 +151,5 @@ const uint16_t inc16_note_vals[] PROGMEM = {
     13153,  //G9 MIDI 127
     
 } 
+
+#endif
