@@ -1,10 +1,4 @@
-
-
-#include "main.h"
-//#include "fullSine.h"
-
-
-const int8_t fullSine[256] PROGMEM = {
+int8_t fullSine[256] = {
   0, 3, 6, 9, 12, 15, 18, 21,
   24, 27, 30, 34, 37, 39, 42, 45,
   48, 51, 54, 57, 60, 62, 65, 68,
@@ -38,49 +32,3 @@ const int8_t fullSine[256] PROGMEM = {
   -49, -46, -43, -40, -38, -35, -31, -28,
   -25, -22, -19, -16, -13, -10, -7, -4
 };
-
-//prototypes
-static inline void init_fast_pwm_timer1(void);
-
-
-
-void main(void)
-{
-    
-    init_fast_pwm_timer1(); //init the pll and timer stuff
-    
-    
-    
-}
-
-static inline void init_fast_pwm_timer1(void){
-    //based off init() in AVR131 document
-    
-    
-    DDRB |= (1<<PB1); //set PB1 as output
-    
-    PLLCSR |= (1<<PLLE);//enable pll
-    
-    loop_until_bit_is_set(PLLCSR, PLOCK);//wait for the PLL to lock
-    
-    PLLCSR |= (1<<PCKE); //set pll as clock for peripherals (timer1 PCK)
-    
-    TCCR1A |= (1<<COM1A1);//set to clear on compare match, set when count is 1
-    
-    OCR1C = 0xFF; //set top count value to 255 (8-bits) total
-    
-    TCCR1A |= (1<<PWM1A); //enable pwm mode for OCR1A
-    
-    TCCR1B |= (1<<CS11); //select PCK/2 for clock source (32MHz) 
-    
-    TIMSK |= (1<<TOIE1); //enable TOV1 interrupt (timer overflow)
-    
-}
-
-//attiny26 isr for timer1 overflow
-ISR(TIMER1_OVF1_vect){
-//the interrupt routine
-
-
-
-}
