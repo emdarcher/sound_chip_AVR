@@ -42,18 +42,24 @@ const int8_t fullSine[256] PROGMEM = {
 };
 */
 
+//vars
+volatile uint16_t accu_16bit;
+volatile uint16_t inc_16bit;
+
 //prototypes
 static inline void init_fast_pwm_timer1(void);
-
 
 
 void main(void)
 {
     
+    
     init_fast_pwm_timer1(); //init the pll and timer stuff
-    
-    
-    
+    sei(); //enable global interrupts
+    /*infinite loop */
+    while(1){
+        
+    }
 }
 
 static inline void init_fast_pwm_timer1(void){

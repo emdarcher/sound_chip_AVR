@@ -13,8 +13,8 @@
 //equation for finding increment value for the 16-bit accumulator
 // increment = ((2^16)*(256)*Fout)/ F_PWM = 1.048576 * Fout 
 
-//#define FREQ_TO_INC16(f) ((((1<<16)<<8)*f)/PWM_CLK_HZ)
-
+//#define FREQ_TO_INC16(f) (((float)((1<<16)<<8)*f)/PWM_CLK_HZ)
+//
 
 //this table is for a 16MHz PWM clk.
 //goes from C0 to G9 MIDI range, but index in array is (MIDI num - 12)
