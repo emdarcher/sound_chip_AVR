@@ -2,11 +2,7 @@
 
 #include "main.h"
 //#include "fullSine.h"
-
-#define PWM_CLK_HZ 16000000UL
-
-#define PWM_OVF_FREQ (PWM_CLK_HZ/256UL)
-
+#include "notes.h"
 
 const int8_t fullSine[256] PROGMEM = {
   0, 3, 6, 9, 12, 15, 18, 21,
