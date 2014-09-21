@@ -1,24 +1,6 @@
 
-#ifndef NOTES_H
-#define NOTES_H
+#include "notes.h"
 
-#include <avr/pgmspace.h>
-/*notes and stuff*/
-
-#define PWM_CLK_HZ 16000000UL //THE PWM CLOCK SPEED AFTER PRESCALE
-
-#define PWM_OVF_FREQ (PWM_CLK_HZ/256UL) //gives the pwm timer overflow freq
-
-#define MIDI_NUM_TO_INDEX(midinum) (midinum - 12)
-
-//equation for finding increment value for the 16-bit accumulator
-// increment = ((2^16)*(256)*Fout)/ F_PWM = 1.048576 * Fout 
-
-//#define FREQ_TO_INC16(f) (((float)((1<<16)<<8)*f)/PWM_CLK_HZ)
-//
-
-extern uint16_t inc16_note_vals[];
-/*
 //this table is for a 16MHz PWM clk.
 //goes from C0 to G9 MIDI range, but index in array is (MIDI num - 12)
 uint16_t inc16_note_vals[] PROGMEM = {
@@ -153,6 +135,4 @@ uint16_t inc16_note_vals[] PROGMEM = {
     12415,  //F#9
     13153,  //G9 MIDI 127
     
-} ;*/
-
-#endif
+} ;

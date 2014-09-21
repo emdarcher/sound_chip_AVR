@@ -1,6 +1,6 @@
 
 
-#include "main.h"
+#include "main.h" //most #defines are in here
 //#include "fullSine.h"
 #include "notes.h"
 #include "int8_sine.h"
@@ -42,18 +42,20 @@ const int8_t fullSine[256] PROGMEM = {
 };
 */
 
+
 //vars
 volatile uint16_t accu_16bit;
 volatile uint16_t inc_16bit;
+volatile uint8_t note_port_store;
 
 //prototypes
 static inline void init_fast_pwm_timer1(void);
-
+static inline void init_note_ctrl(void);
 
 void main(void)
 {
     
-    
+    init_note_ctrl();//init the note ctrl port
     init_fast_pwm_timer1(); //init the pll and timer stuff
     sei(); //enable global interrupts
     /*infinite loop */
@@ -87,10 +89,18 @@ static inline void init_fast_pwm_timer1(void){
     
 }
 
+static inline void init_note_ctrl(void){
+    //inits the port for note control
+    NOTE_CTRL_DDRx |= 0xFF; //set all to input
+}
+
 //attiny26 isr for timer1 overflow
 ISR(TIMER1_OVF1_vect){
 //the interrupt routine
     
+    //note_port_store = (NOTE_CTRL_PINx & ~(1<<NOTE_CHANNEL_SEL_BIT));
+    note_port_store = 60; // middle C for testing
+    accu_16bit += pgm_read_word(&inc16_note_vals[ MIDI_NUM_TO_INDEX(note_port_store) ]);
     
-    
+    OCR1A = 128 + pgm_read_byte(&int8_sine_table[ (uint8_t) (accu_16bit >> 8) ]);
 }

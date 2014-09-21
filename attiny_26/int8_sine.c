@@ -1,14 +1,7 @@
 
+#include "int8_sine.h"
 
-#ifndef INT8_SINE_H
-#define INT8_SINE_H
-
-#include <avr/pgmspace.h>
-
-
-extern int8_t int8_sine_table[];
 /* sine table with int8_t values */
-/*
 int8_t int8_sine_table[256] PROGMEM = {
   0, 3, 6, 9, 12, 15, 18, 21,
   24, 27, 30, 34, 37, 39, 42, 45,
@@ -42,6 +35,4 @@ int8_t int8_sine_table[256] PROGMEM = {
   -71, -69, -66, -63, -61, -58, -55, -52,
   -49, -46, -43, -40, -38, -35, -31, -28,
   -25, -22, -19, -16, -13, -10, -7, -4
-};*/
-
-#endif
+};

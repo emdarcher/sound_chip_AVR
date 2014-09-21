@@ -15,7 +15,7 @@ MAIN = main.c
 ## If you've split your program into multiple files, 
 ## include the additional .c source (in same directory) here 
 ## (and include the .h files in your foo.c)
-#LOCAL_SOURCE = 
+LOCAL_SOURCE = int8_sine.c notes.c
 #LOCAL_SOURCE = ht1632c.c
 #LOCAL_SOURCE += seven_segs.c
 
@@ -54,7 +54,7 @@ AVRDUDE = avrdude
 ## Compilation options, type man avr-gcc if you're curious.
 CFLAGS = -mmcu=$(MCU) -DF_CPU=$(F_CPU)UL -DBAUD=$(BAUD) -Os -I. -I$(EXTRA_SOURCE_DIR)
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
-CFLAGS +=  --combine -fwhole-program 
+#CFLAGS +=  --combine -fwhole-program 
 CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -g -ggdb
 CFLAGS += -ffunction-sections -fdata-sections -Wl,--gc-sections -Wl,--relax
