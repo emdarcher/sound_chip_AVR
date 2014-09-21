@@ -1,4 +1,6 @@
-//notes and stuff
+
+#include <avr/pgmspace.h>
+/*notes and stuff*/
 
 
 #define PWM_CLK_HZ 16000000UL //THE PWM CLOCK SPEED AFTER PRESCALE
