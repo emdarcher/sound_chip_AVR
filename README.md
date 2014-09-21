@@ -10,5 +10,5 @@ The attiny26 code takes a MIDI note number (0-127, 7-bit) from a read of the fir
 
 Other plans:
 ----------
-    * Make code to run on an ATtiny85 that has control over I2C/TWI or SPI if possible, and maybe 2 channels.
+  * Make code to run on an ATtiny85 that has control over I2C/TWI or SPI if possible, and maybe 2 channels.
 
