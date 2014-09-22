@@ -99,7 +99,10 @@ ISR(TIMER1_OVF1_vect){
 //the interrupt routine
     
     //note_port_store = (NOTE_CTRL_PINx & ~(1<<NOTE_CHANNEL_SEL_BIT));
+    
     note_port_store = 60; // middle C for testing
+    
+    note_port_store = (note_port_store >= 12) ? note_port_store : 12;
     accu_16bit += pgm_read_word(&inc16_note_vals[ MIDI_NUM_TO_INDEX(note_port_store) ]);
     
     OCR1A = 128 + pgm_read_byte(&int8_sine_table[ (uint8_t) (accu_16bit >> 8) ]);
