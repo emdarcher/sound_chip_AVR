@@ -42,6 +42,8 @@ const int8_t fullSine[256] PROGMEM = {
 };
 */
 
+#define DO_YOU_WANT_SLEEP 1 //set to 1 if you want the cpu to sleep in loop
+#define SET_SLEEP_ENABLE_BIT MCUCR|=(1<<SE)
 
 //vars
 volatile uint16_t accu_16bit;
@@ -60,7 +62,10 @@ void main(void)
     sei(); //enable global interrupts
     /*infinite loop */
     while(1){
-        
+    #if DO_YOU_WANT_SLEEP!=0
+        SET_SLEEP_ENABLE_BIT;
+        sleep_cpu();//go to sleep
+    #endif
     }
 }
 
