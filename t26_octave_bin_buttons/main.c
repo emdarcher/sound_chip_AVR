@@ -42,7 +42,7 @@ const int8_t fullSine[256] PROGMEM = {
 };
 */
 
-#define DO_YOU_WANT_SLEEP 0 //set to 1 if you want the cpu to sleep in loop
+#define DO_YOU_WANT_SLEEP 1 //set to 1 if you want the cpu to sleep in loop
 #define SET_SLEEP_ENABLE_BIT MCUCR|=(1<<SE)
 
 //vars
@@ -112,8 +112,8 @@ ISR(TIMER1_OVF1_vect){
         --j;
     }
    */ 
-   note_port_store += 60; // middle C for testing
-    note_store = note_port_store; 
+    note_port`_store += 60; // middle C for testing
+    note_store = (note_port_store>0) ? note_port_store-1 : 0; 
     note_store = (note_store >= 12) ? note_store : 12;
     accu_16bit += pgm_read_word(&inc16_note_vals[ MIDI_NUM_TO_INDEX(note_store) ]);
     
