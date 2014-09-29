@@ -96,21 +96,23 @@ static inline void init_fast_pwm_timer1(void){
 
 static inline void init_note_ctrl(void){
     //inits the port for note control
-    NOTE_CTRL_DDRx |= 0xFF; //set all to input
+    NOTE_CTRL_DDRx |= 0x00; //set all to input
 }
 
 //attiny26 isr for timer1 overflow
 ISR(TIMER1_OVF1_vect){
 //the interrupt routine
+   uint8_t note_store; 
     
-//    note_port_store = (bit_is_clear(NOTE_CTRL_PINx,NOTE_CHANNEL_SEL_BIT)) ? (~NOTE_CTRL_PINx & ~(1<<NOTE_CHANNEL_SEL_BIT)) : note_port_store ;
     note_port_store = (~NOTE_CTRL_PINx & ~(1<<NOTE_CHANNEL_SEL_BIT));
     
     //note_port_store = (NOTE_CTRL_PINx & ~(1<<NOTE_CHANNEL_SEL_BIT));
     //note_port_store = 60; // middle C for testing
-    
-    note_port_store = (note_port_store >= 12) ? note_port_store : 12;
-    accu_16bit += pgm_read_word(&inc16_note_vals[ MIDI_NUM_TO_INDEX(note_port_store) ]);
+   
+    note_store = (note_port_store>0) ? note_port_store-1 : 0; 
+    //note_store = 60;
+    note_store = (note_store >= 12) ? note_store : 12;
+    accu_16bit += pgm_read_word(&inc16_note_vals[ MIDI_NUM_TO_INDEX(note_store) ]);
     
     OCR1A = 128 + pgm_read_byte(&int8_sine_table[ (uint8_t) (accu_16bit >> 8) ]);
 }
