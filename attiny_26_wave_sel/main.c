@@ -47,8 +47,8 @@ const int8_t fullSine[256] PROGMEM = {
 
 //vars
 volatile uint16_t accu_16bit;
-volatile uint16_t inc_16bit;
-volatile uint8_t note_port_store;
+//volatile uint16_t inc_16bit;
+//volatile uint8_t note_port_store;
 
 //prototypes
 static inline void init_fast_pwm_timer1(void);
@@ -57,8 +57,9 @@ static inline void init_wave_ctrl(void);
 
 void main(void)
 {
-    
+        
     init_note_ctrl();//init the note ctrl port
+    init_wave_ctrl();//init the wave control pins
     init_fast_pwm_timer1(); //init the pll and timer stuff
     sei(); //enable global interrupts
     /*infinite loop */
@@ -103,15 +104,16 @@ static inline void init_note_ctrl(void){
 
 static inline void init_wave_ctrl(void){
     //inits the port and pins for wave ctrl
-
-    WAVE_CTRL_DDRx &= ~(WAVE_CTRL_BIT0|WAVE_CTRL_BIT1);
+    //set to input
+    WAVE_CTRL_DDRx &= ~((1<<WAVE_CTRL_BIT0)|(1<<WAVE_CTRL_BIT1));
     
 }
 
 //attiny26 isr for timer1 overflow
 ISR(TIMER1_OVF1_vect){
 //the interrupt routine
-   uint8_t note_store; 
+    uint8_t note_port_store;
+    uint8_t note_store; 
     uint8_t wave_bits_store;
     uint8_t temp_OCregA;
     note_port_store = (~NOTE_CTRL_PINx & ~(1<<NOTE_CHANNEL_SEL_BIT));
