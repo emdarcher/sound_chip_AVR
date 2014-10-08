@@ -96,7 +96,7 @@ static inline void init_fast_pwm_timer1(void){
 
 static inline void init_note_ctrl(void){
     //inits the port for note control
-    NOTE_CTRL_DDRx |= 0x00; //set all to input
+    NOTE_CTRL_DDRx = 0x00; //set all to input
 }
 
 //attiny26 isr for timer1 overflow
